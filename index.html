@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="TerraPlus - Smart Agriculture Platform">
+
+    <title>TerraPlus | Smart Agriculture</title>
+
+    <link rel="icon" type="image/png" href="assets/logo.png">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <!-- =========================================
+         TERRAPLUS LOGIN PAGE
+    ========================================== -->
+
+    <main class="login-page">
+
+        <div class="login-container">
+
+
+            <!-- =================================
+                 LOGIN CARD
+            ================================== -->
+
+            <section class="login-card">
+
+
+                <!-- TERRAPLUS LOGO -->
+
+                <div class="login-logo">
+
+                    <img src="assets/logo.png" alt="TerraPlus Logo">
+
+                </div>
+
+
+                <!-- WELCOME MESSAGE -->
+
+                <h1 data-translate="welcomeBack">
+                    Welcome Back 👋
+                </h1>
+
+
+                <p class="login-subtitle" data-translate="loginSubtitle">
+                    Login to your TerraPlus dashboard
+                </p>
+
+
+                <!-- =================================
+                     USERNAME
+                ================================== -->
+
+                <div class="input-group">
+
+                    <label for="username" data-translate="username">
+                        👤 Username
+                    </label>
+
+
+                    <input type="text" id="username" data-translate-placeholder="usernamePlaceholder"
+                        placeholder="Enter your username" autocomplete="username">
+
+                </div>
+
+
+                <!-- =================================
+                     PASSWORD
+                ================================== -->
+
+                <div class="input-group">
+
+                    <label for="password" data-translate="password">
+                        🔒 Password
+                    </label>
+
+
+                    <!-- PASSWORD + REVEAL BUTTON -->
+
+                    <div class="password-wrapper">
+
+                        <input type="password" id="password" data-translate-placeholder="passwordPlaceholder"
+                            placeholder="Enter your password" autocomplete="current-password">
+
+
+                        <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password"
+                            title="Show password">
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     LOGIN OPTIONS
+                ================================== -->
+
+                <div class="login-options">
+
+
+                    <!-- REMEMBER ME -->
+
+                    <label class="remember-me">
+
+                        <input type="checkbox" id="remember">
+
+
+                        <span data-translate="rememberMe">
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <!-- FORGOT PASSWORD -->
+
+                    <button type="button" class="forgot-password" onclick="showForgotMessage()"
+                        data-translate="forgotPassword">
+                        Forgot password?
+                    </button>
+
+                </div>
+
+
+                <!-- =================================
+                     LOGIN BUTTON
+                ================================== -->
+
+                <button type="button" class="login-button" onclick="loginUser()">
+
+                    <span data-translate="login">
+                        Login
+                    </span>
+
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- =================================
+                     PLATFORM INFORMATION
+                ================================== -->
+
+                <div class="platform-info">
+
+                    <span class="platform-icon">
+                        🌱
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            TerraPlus
+                        </strong>
+
+
+                        <small data-translate="smartAgriculturePlatform">
+                            Smart Agriculture Platform
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 LANGUAGE SELECTOR
+            ================================== -->
+
+            <div class="language-selector">
+
+
+                <button type="button" class="language-button active" data-language="en"
+                    onclick="changeLanguage('en', this)" data-translate="english">
+                    English
+                </button>
+
+
+                <button type="button" class="language-button" data-language="gu" onclick="changeLanguage('gu', this)"
+                    data-translate="gujarati">
+                    ગુજરાતી
+                </button>
+
+
+                <button type="button" class="language-button" data-language="hi" onclick="changeLanguage('hi', this)"
+                    data-translate="hindi">
+                    हिंदी
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 FOOTER
+            ================================== -->
+
+            <footer class="login-footer">
+
+                <p data-translate="copyright">
+                    © 2026 TerraPlus
+                </p>
+
+
+                <p data-translate="tagline">
+                    Know Your Soil. Grow Better. 🌱
+                </p>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

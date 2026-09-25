@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TerraPlus | Manual NPK</title>
+
+
+    <style>
+        /* =========================================
+           TERRAPLUS NPK PAGE
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8f1;
+            color: #123d2b;
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           MAIN LAYOUT
+        ========================================= */
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+            width: 270px;
+
+            background: linear-gradient(180deg,
+                    #0f5f32 0%,
+                    #198247 100%);
+
+            padding: 34px 20px;
+
+            color: white;
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            z-index: 100;
+        }
+
+
+        .logo-box {
+            background: white;
+
+            width: 195px;
+            height: 85px;
+
+            margin: 0 auto 55px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+
+        .logo-box img {
+            max-width: 90%;
+            max-height: 75px;
+
+            object-fit: contain;
+        }
+
+
+        .menu-title {
+            font-size: 15px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+
+            margin: 0 15px 20px;
+
+            opacity: 0.75;
+        }
+
+
+        .nav-menu {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+
+        .nav-link {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 16px 20px;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 16px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            transition: 0.25s;
+        }
+
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+
+            transform: translateX(3px);
+        }
+
+
+        .nav-link.active {
+            background: white;
+
+            color: #17683a;
+        }
+
+
+        .nav-icon {
+            font-size: 24px;
+
+            width: 25px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           DEMO MODE
+        ========================================= */
+
+        .demo-mode {
+            position: absolute;
+
+            bottom: 20px;
+
+            left: 25px;
+            right: 25px;
+
+            background: rgba(255, 255, 255, 0.13);
+
+            padding: 15px 18px;
+
+            border-radius: 15px;
+
+            font-weight: bold;
+        }
+
+
+        .demo-dot {
+            display: inline-block;
+
+            width: 12px;
+            height: 12px;
+
+            background: #69f29c;
+
+            border-radius: 50%;
+
+            margin-right: 8px;
+        }
+
+
+        /* =========================================
+           MAIN CONTENT
+        ========================================= */
+
+        .main-content {
+            margin-left: 270px;
+
+            width: calc(100% - 270px);
+
+            padding: 35px 45px;
+        }
+
+
+        /* =========================================
+           TOP HEADER
+        ========================================= */
+
+        .top-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding-bottom: 25px;
+
+            border-bottom: 1px solid #dce7dc;
+        }
+
+
+        .page-brand h1 {
+            color: #145f35;
+
+            font-size: 32px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .page-brand p {
+            color: #779183;
+
+            font-size: 17px;
+        }
+
+
+        .header-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+
+        /* =========================================
+           LANGUAGE
+        ========================================= */
+
+        .language {
+            background: white;
+
+            border: 1px solid #dce7dc;
+
+            padding: 12px 18px;
+
+            border-radius: 15px;
+
+            font-size: 16px;
+
+            color: #174d36;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           NOTIFICATION
+        ========================================= */
+
+        .notification {
+            width: 55px;
+            height: 55px;
+
+            background: white;
+
+            border: 1px solid #dce7dc;
+
+            border-radius: 15px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .notification:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 6px 15px rgba(20, 80, 45, 0.10);
+        }
+
+
+        /* =========================================
+           USER
+        ========================================= */
+
+        .user-box {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+
+            background: #eaf5e8;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+
+        .user-name {
+            font-weight: bold;
+
+            font-size: 17px;
+        }
+
+
+        .user-role {
+            color: #7d9186;
+
+            font-size: 13px;
+
+            margin-top: 4px;
+        }
+
+
+        /* =========================================
+           PAGE HEADER
+        ========================================= */
+
+        .page-heading {
+            margin-top: 40px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .page-heading h2 {
+            font-size: 36px;
+
+            color: #103f2a;
+
+            margin-bottom: 10px;
+        }
+
+
+        .page-heading p {
+            color: #789086;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           SYSTEM STATUS
+        ========================================= */
+
+        .system-status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            background: white;
+
+            padding: 13px 22px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 18px rgba(20, 80, 45, 0.06);
+
+            margin-bottom: 28px;
+
+            font-weight: bold;
+        }
+
+
+        .online-dot {
+            width: 14px;
+            height: 14px;
+
+            background: #2bc978;
+
+            border-radius: 50%;
+        }
+
+
+        /* =========================================
+           NPK GRID
+        ========================================= */
+
+        .npk-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 25px;
+
+            margin-top: 20px;
+        }
+
+
+        /* =========================================
+           NPK CARD
+        ========================================= */
+
+        .npk-card {
+            background: white;
+
+            border: 1px solid #e1ebe1;
+
+            border-radius: 25px;
+
+            padding: 28px;
+
+            min-height: 340px;
+
+            box-shadow:
+                0 8px 25px rgba(25, 90, 50, 0.07);
+
+            transition: 0.3s;
+        }
+
+
+        .npk-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 30px rgba(25, 90, 50, 0.12);
+        }
+
+
+        /* =========================================
+           NUTRIENT HEADER
+        ========================================= */
+
+        .nutrient-top {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .nutrient-icon {
+            width: 58px;
+            height: 58px;
+
+            background: #edf7eb;
+
+            border-radius: 17px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 29px;
+        }
+
+
+        .nutrient-name {
+            font-size: 19px;
+
+            font-weight: bold;
+
+            color: #517164;
+        }
+
+
+        /* =========================================
+           NUTRIENT VALUE
+        ========================================= */
+
+        .nutrient-value {
+            font-size: 50px;
+
+            font-weight: 800;
+
+            color: #0b5b34;
+
+            margin-bottom: 4px;
+        }
+
+
+        .unit {
+            font-size: 16px;
+
+            color: #84978d;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================================
+           VALVE AREA
+        ========================================= */
+
+        .valve-area {
+            margin-top: 15px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #e5eee5;
+        }
+
+
+        .valve-name {
+            font-size: 15px;
+
+            font-weight: bold;
+
+            color: #557267;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* =========================================
+           VALVE BUTTON
+        ========================================= */
+
+        .valve-button {
+            width: 100%;
+
+            border: none;
+
+            padding: 14px 18px;
+
+            border-radius: 13px;
+
+            background: #edf5ee;
+
+            color: #1a7141;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .valve-button:hover {
+            transform: translateY(-2px);
+
+            background: #e1efe3;
+        }
+
+
+        .valve-button:active {
+            transform: translateY(0);
+        }
+
+
+        .valve-button.active {
+            background: #198447;
+
+            color: white;
+
+            box-shadow:
+                0 7px 18px rgba(25, 132, 71, 0.25);
+        }
+
+
+        .valve-button.active:hover {
+            background: #146c39;
+        }
+
+
+        /* =========================================
+           VALVE STATUS
+        ========================================= */
+
+        .valve-status {
+            margin-top: 13px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: #bfc9c3;
+        }
+
+
+        .status-dot.active {
+            background: #2bc978;
+        }
+
+
+        .status-text {
+            color: #7d8f86;
+        }
+
+
+        .status-text.active {
+            color: #198447;
+        }
+
+
+        /* =========================================
+           INFORMATION BOX
+        ========================================= */
+
+        .info-box {
+            margin-top: 30px;
+
+            background: #fffdf1;
+
+            border: 1px solid #f0e6ae;
+
+            border-radius: 18px;
+
+            padding: 18px 22px;
+
+            color: #756a2f;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        .info-icon {
+            font-size: 22px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =========================================
+           ACTIVE VALVE SUMMARY
+        ========================================= */
+
+        .active-summary {
+            margin-top: 30px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 22px 25px;
+
+            border: 1px solid #e0ebe1;
+
+            box-shadow:
+                0 6px 20px rgba(20, 80, 45, 0.05);
+        }
+
+
+        .active-summary h3 {
+            margin-bottom: 12px;
+
+            color: #154c32;
+
+            font-size: 21px;
+        }
+
+
+        .active-list {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+
+        .active-chip {
+            background: #e8f7ed;
+
+            color: #18723f;
+
+            padding: 9px 14px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        .none-active {
+            color: #8a9991;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           FOOTER NOTE
+        ========================================= */
+
+        .page-note {
+            margin-top: 25px;
+
+            padding: 15px;
+
+            text-align: center;
+
+            color: #82938b;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE - TABLET
+        ========================================= */
+
+        @media (max-width: 1100px) {
+
+            .npk-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .sidebar {
+                width: 230px;
+            }
+
+
+            .main-content {
+                margin-left: 230px;
+
+                width: calc(100% - 230px);
+
+                padding: 30px;
+            }
+
+        }
+
+
+        /* =========================================
+           RESPONSIVE - MOBILE
+        ========================================= */
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                position: relative;
+
+                width: 100%;
+
+                min-height: auto;
+
+                padding: 25px 20px;
+            }
+
+
+            .app-container {
+                display: block;
+            }
+
+
+            .logo-box {
+                margin-bottom: 30px;
+            }
+
+
+            .demo-mode {
+                position: relative;
+
+                left: auto;
+                right: auto;
+                bottom: auto;
+
+                margin-top: 25px;
+            }
+
+
+            .main-content {
+                margin-left: 0;
+
+                width: 100%;
+
+                padding: 20px;
+            }
+
+
+            .top-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 20px;
+            }
+
+
+            .header-right {
+                width: 100%;
+
+                flex-wrap: wrap;
+            }
+
+
+            .page-heading {
+                margin-top: 30px;
+            }
+
+
+            .page-heading h2 {
+                font-size: 29px;
+            }
+
+
+            .npk-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .npk-card {
+                min-height: auto;
+            }
+
+        }
+
+
+        /* =========================================
+           VERY SMALL SCREENS
+        ========================================= */
+
+        @media (max-width: 480px) {
+
+            .page-brand h1 {
+                font-size: 27px;
+            }
+
+
+            .page-brand p {
+                font-size: 14px;
+            }
+
+
+            .header-right {
+                gap: 10px;
+            }
+
+
+            .language {
+                width: 100%;
+            }
+
+
+            .user-box {
+                width: 100%;
+            }
+
+
+            .page-heading h2 {
+                font-size: 25px;
+            }
+
+
+            .nutrient-value {
+                font-size: 42px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="app-container">
+
+
+        <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- LOGO -->
+
+            <div class="logo-box">
+
+                <img src="assets/logo.png" alt="TerraPlus Logo" onerror="this.style.display='none';">
+
+            </div>
+
+
+            <!-- MENU TITLE -->
+
+            <div class="menu-title">
+                MAIN MENU
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="nav-menu">
+
+
+                <!-- DASHBOARD -->
+
+                <a href="dashboard.html" class="nav-link">
+
+                    <span class="nav-icon">
+                        🏠
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+
+                <!-- ANALYTICS -->
+
+                <a href="analytics.html" class="nav-link">
+
+                    <span class="nav-icon">
+                        📊
+                    </span>
+
+                    Analytics
+
+                </a>
+
+
+                <!-- NPK -->
+
+                <a href="npk.html" class="nav-link active">
+
+                    <span class="nav-icon">
+                        🌱
+                    </span>
+
+                    NPK
+
+                </a>
+
+
+                <!-- DEVICES -->
+
+                <a href="devices.html" class="nav-link">
+
+                    <span class="nav-icon">
+                        🔌
+                    </span>
+
+                    Devices
+
+                </a>
+
+
+                <!-- SETTINGS -->
+
+                <a href="settings.html" class="nav-link">
+
+                    <span class="nav-icon">
+                        ⚙️
+                    </span>
+
+                    Settings
+
+                </a>
+
+
+            </nav>
+
+
+            <!-- DEMO MODE -->
+
+            <div class="demo-mode">
+
+                <span class="demo-dot"></span>
+
+                DEMO MODE
+
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- =====================================
+         MAIN CONTENT
+    ====================================== -->
+
+        <main class="main-content">
+
+
+            <!-- =================================
+             TOP HEADER
+        ================================== -->
+
+            <header class="top-header">
+
+
+                <!-- BRAND -->
+
+                <div class="page-brand">
+
+                    <h1>
+                        TerraPlus
+                    </h1>
+
+                    <p>
+                        Smart Farming Dashboard
+                    </p>
+
+                </div>
+
+
+
+                <!-- HEADER RIGHT -->
+
+                <div class="header-right">
+
+
+                    <!-- LANGUAGE -->
+
+                    <select class="language" aria-label="Select language">
+
+                        <option value="English">
+                            🌐 English
+                        </option>
+
+                        <option value="Gujarati">
+                            🌐 ગુજરાતી
+                        </option>
+
+                        <option value="Hindi">
+                            🌐 हिन्दी
+                        </option>
+
+                    </select>
+
+
+
+                    <!-- NOTIFICATION -->
+
+                    <div class="notification" title="Notifications" role="button" tabindex="0">
+
+                        🔔
+
+                    </div>
+
+
+
+                    <!-- USER -->
+
+                    <div class="user-box">
+
+
+                        <div class="user-avatar">
+                            🧑‍🌾
+                        </div>
+
+
+                        <div>
+
+                            <div class="user-name">
+                                Farmer
+                            </div>
+
+                            <div class="user-role">
+                                TerraPlus User
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =================================
+             PAGE HEADING
+        ================================== -->
+
+            <section class="page-heading">
+
+
+                <h2>
+                    Manual NPK Management 🌱
+                </h2>
+
+
+                <p>
+                    Monitor your NPK values and control each
+                    fertilizer solenoid valve manually.
+                </p>
+
+
+            </section>
+
+
+
+            <!-- =================================
+             SYSTEM STATUS
+        ================================== -->
+
+            <div class="system-status">
+
+
+                <span class="online-dot"></span>
+
+
+                <span>
+                    System Online — Demo Mode
+                </span>
+
+
+            </div>
+
+
+
+            <!-- =====================================
+             NPK CARDS
+        ====================================== -->
+
+            <section class="npk-grid">
+
+
+                <!-- =================================
+                 NITROGEN
+            ================================== -->
+
+                <div class="npk-card">
+
+
+                    <div class="nutrient-top">
+
+
+                        <div class="nutrient-icon">
+                            🌿
+                        </div>
+
+
+                        <div class="nutrient-name">
+                            Nitrogen
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="nutrient-value" id="nitrogenValue">
+
+                        180
+
+                    </div>
+
+
+                    <div class="unit">
+                        mg/kg
+                    </div>
+
+
+
+                    <div class="valve-area">
+
+
+                        <div class="valve-name">
+                            💧 Nitrogen Solenoid Valve
+                        </div>
+
+
+                        <button type="button" class="valve-button" id="nitrogenButton"
+                            onclick="toggleValve('nitrogen')">
+
+                            ACTIVATE VALVE
+
+                        </button>
+
+
+
+                        <div class="valve-status">
+
+
+                            <span class="status-dot" id="nitrogenDot">
+                            </span>
+
+
+                            <span class="status-text" id="nitrogenStatus">
+
+                                Valve OFF
+
+                            </span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                 PHOSPHORUS
+            ================================== -->
+
+                <div class="npk-card">
+
+
+                    <div class="nutrient-top">
+
+
+                        <div class="nutrient-icon">
+                            🌱
+                        </div>
+
+
+                        <div class="nutrient-name">
+                            Phosphorus
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="nutrient-value" id="phosphorusValue">
+
+                        75
+
+                    </div>
+
+
+                    <div class="unit">
+                        mg/kg
+                    </div>
+
+
+
+                    <div class="valve-area">
+
+
+                        <div class="valve-name">
+                            💧 Phosphorus Solenoid Valve
+                        </div>
+
+
+                        <button type="button" class="valve-button" id="phosphorusButton"
+                            onclick="toggleValve('phosphorus')">
+
+                            ACTIVATE VALVE
+
+                        </button>
+
+
+
+                        <div class="valve-status">
+
+
+                            <span class="status-dot" id="phosphorusDot">
+                            </span>
+
+
+                            <span class="status-text" id="phosphorusStatus">
+
+                                Valve OFF
+
+                            </span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                 POTASSIUM
+            ================================== -->
+
+                <div class="npk-card">
+
+
+                    <div class="nutrient-top">
+
+
+                        <div class="nutrient-icon">
+                            🌾
+                        </div>
+
+
+                        <div class="nutrient-name">
+                            Potassium
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="nutrient-value" id="potassiumValue">
+
+                        120
+
+                    </div>
+
+
+                    <div class="unit">
+                        mg/kg
+                    </div>
+
+
+
+                    <div class="valve-area">
+
+
+                        <div class="valve-name">
+                            💧 Potassium Solenoid Valve
+                        </div>
+
+
+                        <button type="button" class="valve-button" id="potassiumButton"
+                            onclick="toggleValve('potassium')">
+
+                            ACTIVATE VALVE
+
+                        </button>
+
+
+
+                        <div class="valve-status">
+
+
+                            <span class="status-dot" id="potassiumDot">
+                            </span>
+
+
+                            <span class="status-text" id="potassiumStatus">
+
+                                Valve OFF
+
+                            </span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =====================================
+             INFORMATION BOX
+        ====================================== -->
+
+            <div class="info-box">
+
+
+                <span class="info-icon">
+                    💡
+                </span>
+
+
+                <span>
+
+                    Each NPK solenoid valve can be controlled
+                    independently. Multiple valves can remain
+                    active at the same time.
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- =====================================
+             ACTIVE VALVE SUMMARY
+        ====================================== -->
+
+            <div class="active-summary">
+
+
+                <h3>
+                    Active Valves
+                </h3>
+
+
+                <div class="active-list" id="activeValveList">
+
+
+                    <span class="none-active">
+
+                        No valves are currently active.
+
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =====================================
+             PAGE NOTE
+        ====================================== -->
+
+            <div class="page-note">
+
+                TerraPlus NPK control is currently running
+                in Demo Mode. Hardware control will be
+                connected through ESP8266 later.
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+     EXTERNAL NPK JAVASCRIPT
+========================================= -->
+
+    <script src="js/npk.js"></script>
+
+
+</body>
+
+</html>

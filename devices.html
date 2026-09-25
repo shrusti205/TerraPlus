@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraPlus | Devices</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <style>
+        /* =========================================================
+           TERRAPLUS DEVICES PAGE
+           Uses the existing dashboard.css and adds only
+           Devices-page-specific styling.
+           ========================================================= */
+
+        .devices-page {
+            padding-bottom: 40px;
+        }
+
+        .devices-header {
+            margin-bottom: 24px;
+        }
+
+        .devices-header h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+        }
+
+        .devices-header p {
+            margin: 0;
+            opacity: 0.75;
+        }
+
+        .system-overview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .overview-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .overview-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .overview-label {
+            font-size: 13px;
+            opacity: 0.65;
+            margin-bottom: 6px;
+        }
+
+        .overview-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .status-pill.online {
+            background: #e8f8ee;
+            color: #178545;
+        }
+
+        .status-pill.offline {
+            background: #fdeaea;
+            color: #c43b3b;
+        }
+
+        .status-pill.demo {
+            background: #fff4d9;
+            color: #9b6a00;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .device-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .device-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .device-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .device-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .device-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: #eef8f0;
+        }
+
+        .device-title h3 {
+            margin: 0 0 4px;
+            font-size: 18px;
+        }
+
+        .device-title p {
+            margin: 0;
+            font-size: 12px;
+            opacity: 0.62;
+        }
+
+        .device-status {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .device-status.ready {
+            background: #e8f8ee;
+            color: #178545;
+        }
+
+        .device-status.active {
+            background: #e7f1ff;
+            color: #2769b5;
+        }
+
+        .device-status.warning {
+            background: #fff4d9;
+            color: #9b6a00;
+        }
+
+        .device-status.offline {
+            background: #fdeaea;
+            color: #c43b3b;
+        }
+
+        .device-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .info-item {
+            background: #f7f9f8;
+            border-radius: 12px;
+            padding: 13px;
+        }
+
+        .info-label {
+            display: block;
+            font-size: 11px;
+            opacity: 0.6;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .valve-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .valve-item {
+            border: 1px solid #e7ebe8;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .valve-icon {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .valve-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .valve-state {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .valve-state.ready {
+            color: #178545;
+        }
+
+        .valve-state.active {
+            color: #2769b5;
+        }
+
+        .hardware-note {
+            margin-top: 18px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: #f5f8f6;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .last-update {
+            margin-top: 18px;
+            text-align: right;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 1100px) {
+            .system-overview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .devices-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .device-card.full-width {
+                grid-column: auto;
+            }
+
+            .valve-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .system-overview {
+                grid-template-columns: 1fr;
+            }
+
+            .device-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .device-card-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         SIDEBAR
+         ========================================================= -->
+    <aside class="sidebar">
+
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="TerraPlus Logo">
+        </div>
+
+        <div class="menu-title" data-translate="mainMenu">MAIN MENU</div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                <span data-translate="dashboard">Dashboard</span>
+            </a>
+
+            <a href="analytics.html" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span data-translate="analytics">Analytics</span>
+            </a>
+
+            <a href="npk.html" class="nav-item">
+                <span class="nav-icon">🧪</span>
+                <span data-translate="npk">NPK</span>
+            </a>
+
+            <a href="irrigation.html" class="nav-item">
+                <span class="nav-icon">💧</span>
+                <span data-translate="irrigation">Irrigation</span>
+            </a>
+
+            <a href="devices.html" class="nav-item active">
+                <span class="nav-icon">🔌</span>
+                <span data-translate="devices">Devices</span>
+            </a>
+
+            <a href="settings.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                <span data-translate="settings">Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="demo-status" id="demoModeStatus">
+                <span class="status-dot"></span>
+                <span id="sidebarModeText">DEMO MODE</span>
+            </div>
+
+            <button class="logout-btn" id="logoutButton">
+                <span>🚪</span>
+                <span data-translate="logout">Logout</span>
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+         ========================================================= -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+                <button class="mobile-menu-btn" id="mobileMenuButton">☰</button>
+
+                <div>
+                    <h2 id="pageTitle">Devices</h2>
+                    <p data-translate="smartFarmingDashboard">
+                        Smart Farming Dashboard
+                    </p>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+
+                <select id="languageSelector" class="language-selector">
+                    <option value="en" data-translate="english">English</option>
+                    <option value="gu" data-translate="gujarati">ગુજરાતી</option>
+                    <option value="hi" data-translate="hindi">हिन्दी</option>
+                </select>
+
+                <button class="icon-button" id="notificationButton" title="Notifications">
+                    🔔
+                </button>
+
+                <div class="user-profile">
+                    <div class="user-avatar">S</div>
+                    <div>
+                        <strong id="userName">shru</strong>
+                        <span data-translate="terraPlusUser">TerraPlus User</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             DEVICES CONTENT
+             ===================================================== -->
+        <section class="content-section active devices-page">
+
+            <div class="devices-header">
+                <h1 data-translate="devicesPageTitle">
+                    Connected Devices
+                </h1>
+
+                <p data-translate="monitorConnectedHardware">
+                    Monitor and manage your TerraPlus hardware.
+                </p>
+            </div>
+
+
+            <!-- SYSTEM OVERVIEW -->
+            <div class="system-overview">
+
+                <div class="overview-card">
+                    <div class="overview-icon">📡</div>
+                    <div class="overview-label">ESP8266</div>
+                    <div class="overview-value" id="espOverviewValue">
+                        Connected
+                    </div>
+                    <div class="status-pill demo" id="espOverviewStatus">
+                        <span class="status-dot"></span>
+                        Demo Mode
+                    </div>
+                </div>
+
+                <div class="overview-card">
+                    <div class="overview-icon">🌡️</div>
+                    <div class="overview-label">DHT22</div>
+                    <div class="overview-value" id="dhtOverviewValue">
+                        Ready
+                    </div>
+                    <div class="status-pill online">
+                        <span class="status-dot"></span>
+                        Online
+                    </div>
+                </div>
+
+                <div class="overview-card">
+                    <div class="overview-icon">👁️</div>
+                    <div class="overview-label">IR Sensor</div>
+                    <div class="overview-value" id="irOverviewValue">
+                        No Object
+                    </div>
+                    <div class="status-pill online">
+                        <span class="status-dot"></span>
+                        Online
+                    </div>
+                </div>
+
+                <div class="overview-card">
+                    <div class="overview-icon">🔌</div>
+                    <div class="overview-label">System</div>
+                    <div class="overview-value" id="systemOverviewValue">
+                        Demo Mode
+                    </div>
+                    <div class="status-pill demo" id="systemOverviewStatus">
+                        <span class="status-dot"></span>
+                        Simulation
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- DEVICE CARDS -->
+            <div class="devices-grid">
+
+                <!-- ESP8266 -->
+                <article class="device-card">
+
+                    <div class="device-card-header">
+
+                        <div class="device-title">
+                            <div class="device-icon">📡</div>
+
+                            <div>
+                                <h3 data-translate="esp8266">ESP8266</h3>
+                                <p>Wi-Fi Controller / Sensor Gateway</p>
+                            </div>
+                        </div>
+
+                        <span class="device-status active" id="espStatus">
+                            Demo
+                        </span>
+
+                    </div>
+
+                    <div class="device-info-grid">
+
+                        <div class="info-item">
+                            <span class="info-label">Connection</span>
+                            <span class="info-value" id="espConnection">
+                                Connected
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Wi-Fi</span>
+                            <span class="info-value" id="espWifi">
+                                Connected
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">IP Address</span>
+                            <span class="info-value" id="espIp">
+                                Demo Mode
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">API</span>
+                            <span class="info-value" id="espApi">
+                                /api/data
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="hardware-note">
+                        <strong>ESP8266-12E:</strong>
+                        The ESP8266 will provide live DHT22 and IR sensor
+                        data when TerraPlus is switched from Demo Mode to
+                        Live Mode.
+                    </div>
+
+                </article>
+
+
+                <!-- DHT22 -->
+                <article class="device-card">
+
+                    <div class="device-card-header">
+
+                        <div class="device-title">
+                            <div class="device-icon">🌡️</div>
+
+                            <div>
+                                <h3 data-translate="dht22Sensor">DHT22 Sensor</h3>
+                                <p data-translate="temperatureHumidity">
+                                    Temperature & Humidity
+                                </p>
+                            </div>
+                        </div>
+
+                        <span class="device-status ready" id="dhtStatus">
+                            Ready
+                        </span>
+
+                    </div>
+
+                    <div class="device-info-grid">
+
+                        <div class="info-item">
+                            <span class="info-label">Temperature</span>
+                            <span class="info-value" id="deviceTemperature">
+                                -- °C
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Humidity</span>
+                            <span class="info-value" id="deviceHumidity">
+                                -- %
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Data Pin</span>
+                            <span class="info-value">D2</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Sensor Type</span>
+                            <span class="info-value">DHT22</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IR SENSOR -->
+                <article class="device-card">
+
+                    <div class="device-card-header">
+
+                        <div class="device-title">
+                            <div class="device-icon">👁️</div>
+
+                            <div>
+                                <h3 data-translate="irSensor">IR Sensor</h3>
+                                <p data-translate="objectDetection">
+                                    Object Detection
+                                </p>
+                            </div>
+                        </div>
+
+                        <span class="device-status ready" id="irStatus">
+                            Ready
+                        </span>
+
+                    </div>
+
+                    <div class="device-info-grid">
+
+                        <div class="info-item">
+                            <span class="info-label">Detection</span>
+                            <span class="info-value" id="deviceIrValue">
+                                No Object
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Sensor Pin</span>
+                            <span class="info-value">D5</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Buzzer</span>
+                            <span class="info-value">D6</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Sensor Type</span>
+                            <span class="info-value">IR</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IR / OUTPUT -->
+                <article class="device-card">
+
+                    <div class="device-card-header">
+
+                        <div class="device-title">
+                            <div class="device-icon">💡</div>
+
+                            <div>
+                                <h3>Output Indicators</h3>
+                                <p>RGB LED & Buzzer</p>
+                            </div>
+                        </div>
+
+                        <span class="device-status ready" id="outputStatus">
+                            Ready
+                        </span>
+
+                    </div>
+
+                    <div class="device-info-grid">
+
+                        <div class="info-item">
+                            <span class="info-label">Red LED</span>
+                            <span class="info-value">D1</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Green LED</span>
+                            <span class="info-value">D7</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Blue LED</span>
+                            <span class="info-value">D8</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Buzzer</span>
+                            <span class="info-value">D6</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IRRIGATION RELAY -->
+                <article class="device-card">
+
+                    <div class="device-card-header">
+
+                        <div class="device-title">
+                            <div class="device-icon">💧</div>
+
+                            <div>
+                                <h3 data-translate="irrigationRelay">
+                                    Irrigation Relay
+                                </h3>
+                                <p data-translate="relay5v2ch">
+                                    5V 2-Channel Relay Module
+                                </p>
+                            </div>
+                        </div>
+
+                        <span class="device-status ready" id="irrigationRelayStatus">
+                            Ready
+                        </span>
+
+                    </div>
+
+                    <div class="device-info-grid">
+
+                        <div class="info-item">
+                            <span class="info-label">Motor</span>
+                            <span class="info-value" id="deviceMotorState">
+                                OFF
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Relay</span>
+                            <span class="info-value" id="deviceRelayState">
+                                OFF
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Mode</span>
+                            <span class="info-value">Manual</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Control</span>
+                            <span class="info-value">Website</span>
+                        </div>
+
+                    </div>
+
+                    <div class="hardware-note">
+                        Irrigation is currently a <strong>manual control</strong>
+                        feature. Automatic soil-moisture irrigation is not part
+                        of the current TerraPlus scope.
+                    </div>
+
+                </article>
+
+
+                <!-- ARDUINO -->
+                <article class="device-card">
+
+                    <div class="device-card-header">
+
+                        <div class="device-title">
+                            <div class="device-icon">💻</div>
+
+                            <div>
+                                <h3 data-translate="arduinoUno">Arduino UNO</h3>
+                                <p data-translate="mainController">
+                                    Main Controller
+                                </p>
+                            </div>
+                        </div>
+
+                        <span class="device-status ready">
+                            Ready
+                        </span>
+
+                    </div>
+
+                    <div class="device-info-grid">
+
+                        <div class="info-item">
+                            <span class="info-label">Board</span>
+                            <span class="info-value">Arduino UNO</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Role</span>
+                            <span class="info-value">Main Controller</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Connection</span>
+                            <span class="info-value">USB / Serial</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Status</span>
+                            <span class="info-value">Ready</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- NPK VALVES -->
+                <article class="device-card full-width">
+
+                    <div class="device-card-header">
+
+                        <div class="device-title">
+                            <div class="device-icon">🧪</div>
+
+                            <div>
+                                <h3 data-translate="npkSolenoidValves">
+                                    NPK Solenoid Valves
+                                </h3>
+                                <p data-translate="threeManualValves">
+                                    Three manual fertilizer valves
+                                </p>
+                            </div>
+                        </div>
+
+                        <span class="device-status ready" id="npkOverallStatus">
+                            Ready
+                        </span>
+
+                    </div>
+
+                    <div class="valve-grid">
+
+                        <div class="valve-item">
+                            <div class="valve-icon">🌱</div>
+                            <div class="valve-name">Nitrogen</div>
+                            <div class="valve-state ready" id="nitrogenDeviceState">
+                                Ready
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Valve</span>
+                                <span class="info-value">N</span>
+                            </div>
+                        </div>
+
+                        <div class="valve-item">
+                            <div class="valve-icon">🌿</div>
+                            <div class="valve-name">Phosphorus</div>
+                            <div class="valve-state ready" id="phosphorusDeviceState">
+                                Ready
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Valve</span>
+                                <span class="info-value">P</span>
+                            </div>
+                        </div>
+
+                        <div class="valve-item">
+                            <div class="valve-icon">🍃</div>
+                            <div class="valve-name">Potassium</div>
+                            <div class="valve-state ready" id="potassiumDeviceState">
+                                Ready
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Valve</span>
+                                <span class="info-value">K</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="hardware-note">
+                        The NPK values shown in TerraPlus are entered manually.
+                        These solenoid valves are used for fertilizer flow
+                        control and are separate from NPK sensing.
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <div class="last-update">
+                <span>Last update:</span>
+                <strong id="lastDeviceUpdate">--</strong>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         NOTIFICATION
+         ========================================================= -->
+    <div class="notification-popup" id="notificationPopup">
+        <div class="notification-icon">🔔</div>
+
+        <div>
+            <strong data-translate="terraPlusNotification">
+                TerraPlus Notification
+            </strong>
+
+            <p id="notificationMessage">
+                System running normally.
+            </p>
+        </div>
+
+        <button id="closeNotification">×</button>
+    </div>
+
+
+    <script src="js/devices.js"></script>
+
+</body>
+</html>

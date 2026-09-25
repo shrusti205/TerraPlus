@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TerraPlus | Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+
+<body>
+
+    <!-- =========================================================
+         TERRAPLUS DASHBOARD
+    ========================================================== -->
+
+    <div class="app-container">
+
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- LOGO -->
+
+            <div class="sidebar-logo">
+
+                <img src="assets/logo.png" alt="TerraPlus Logo" class="logo-image">
+
+            </div>
+
+
+            <!-- MAIN NAVIGATION -->
+
+            <nav class="sidebar-navigation">
+
+                <div class="menu-title" data-translate="mainMenu">
+                    MAIN MENU
+                </div>
+
+
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+
+                    <span class="nav-icon">🏠</span>
+
+                    <span data-translate="dashboard">
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <a href="#analytics" class="nav-item" data-section="analytics">
+
+                    <span class="nav-icon">📊</span>
+
+                    <span data-translate="analytics">
+                        Analytics
+                    </span>
+
+                </a>
+
+
+                <a href="#npk" class="nav-item" data-section="npk">
+
+                    <span class="nav-icon">🌱</span>
+
+                    <span data-translate="npk">
+                        NPK
+                    </span>
+
+                </a>
+
+
+                <a href="#irrigation" class="nav-item" data-section="irrigation">
+
+                    <span class="nav-icon">💧</span>
+
+                    <span data-translate="irrigation">
+                        Irrigation
+                    </span>
+
+                </a>
+
+
+                <a href="#devices" class="nav-item" data-section="devices">
+
+                    <span class="nav-icon">🔌</span>
+
+                    <span data-translate="devices">
+                        Devices
+                    </span>
+
+                </a>
+
+
+                <a href="#settings" class="nav-item" data-section="settings">
+
+                    <span class="nav-icon">⚙️</span>
+
+                    <span data-translate="settings">
+                        Settings
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+            <!-- SIDEBAR BOTTOM -->
+
+            <div class="sidebar-bottom">
+
+                <div class="demo-status" id="demoModeStatus">
+
+                    <span class="status-dot"></span>
+
+                    <span data-translate="demoMode">
+                        DEMO MODE
+                    </span>
+
+                </div>
+
+
+                <button class="logout-button" id="logoutButton" type="button">
+
+                    🚪
+
+                    <span data-translate="logout">
+                        Logout
+                    </span>
+
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================================
+             MAIN CONTENT
+        ====================================================== -->
+
+        <main class="main-content">
+
+
+            <!-- =================================================
+                 TOP BAR
+            ================================================== -->
+
+            <header class="topbar">
+
+
+                <div class="topbar-left">
+
+                    <button class="menu-toggle" id="menuToggle" type="button">
+                        ☰
+                    </button>
+
+
+                    <div>
+
+                        <div class="page-title">
+                            TerraPlus
+                        </div>
+
+                        <div class="page-subtitle" data-translate="smartFarmingDashboard">
+                            Smart Farming Dashboard
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="topbar-right">
+
+
+                    <!-- LANGUAGE -->
+
+                    <div class="language-selector">
+
+                        <span class="language-select-icon">
+                            🌐
+                        </span>
+
+                        <select id="languageSelector" aria-label="Select dashboard language">
+
+                            <option value="en" data-translate="english">
+                                English
+                            </option>
+
+                            <option value="gu" data-translate="gujarati">
+                                ગુજરાતી
+                            </option>
+
+                            <option value="hi" data-translate="hindi">
+                                हिंदी
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- NOTIFICATION -->
+
+                    <button class="icon-button" id="notificationButton" type="button" aria-label="Notifications">
+                        🔔
+                    </button>
+
+
+                    <!-- USER -->
+
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            👨‍🌾
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong id="dashboardUserName">
+                                shru
+                            </strong>
+
+                            <span data-translate="terraPlusUser">
+                                TerraPlus User
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <section id="dashboard" class="content-section active-section">
+
+
+                <!-- WELCOME -->
+
+                <div class="welcome-section">
+
+                    <div>
+
+                        <h1 data-translate="welcomeBackDashboard">
+                            Welcome back! 👋
+                        </h1>
+
+                        <p data-translate="farmOverview">
+                            Here's your farm overview 🌱
+                        </p>
+
+                    </div>
+
+
+                    <div class="current-time" id="currentTime">
+                        Loading time...
+                    </div>
+
+                </div>
+
+
+                <!-- SENSOR CARDS -->
+
+                <div class="sensor-grid">
+
+
+                    <!-- TEMPERATURE -->
+
+                    <div class="sensor-card">
+
+                        <div class="sensor-card-header">
+
+                            <div class="sensor-icon">
+                                🌡️
+                            </div>
+
+                            <div class="sensor-label" data-translate="temperature">
+                                Temperature
+                            </div>
+
+                        </div>
+
+
+                        <div class="sensor-value">
+
+                            <span id="temperatureValue">
+                                28.6
+                            </span>
+
+                            <span class="unit">
+                                °C
+                            </span>
+
+                        </div>
+
+
+                        <div class="sensor-status normal" data-translate="normal">
+                            🟢 Normal
+                        </div>
+
+                    </div>
+
+
+                    <!-- HUMIDITY -->
+
+                    <div class="sensor-card">
+
+                        <div class="sensor-card-header">
+
+                            <div class="sensor-icon">
+                                💧
+                            </div>
+
+                            <div class="sensor-label" data-translate="humidity">
+                                Humidity
+                            </div>
+
+                        </div>
+
+
+                        <div class="sensor-value">
+
+                            <span id="humidityValue">
+                                64
+                            </span>
+
+                            <span class="unit">
+                                %
+                            </span>
+
+                        </div>
+
+
+                        <div class="sensor-status normal" data-translate="normal">
+                            🟢 Normal
+                        </div>
+
+                    </div>
+
+
+                    <!-- NPK -->
+
+                    <div class="sensor-card">
+
+                        <div class="sensor-card-header">
+
+                            <div class="sensor-icon">
+                                🌱
+                            </div>
+
+                            <div class="sensor-label" data-translate="npkStatus">
+                                NPK Status
+                            </div>
+
+                        </div>
+
+
+                        <div class="npk-mini-values">
+
+                            <div>
+
+                                <strong id="nitrogenValue">
+                                    180
+                                </strong>
+
+                                <small>N</small>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong id="phosphorusValue">
+                                    75
+                                </strong>
+
+                                <small>P</small>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong id="potassiumValue">
+                                    120
+                                </strong>
+
+                                <small>K</small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="sensor-status normal" data-translate="balanced">
+                            🟢 Balanced
+                        </div>
+
+                    </div>
+
+
+                    <!-- IR SENSOR -->
+
+                    <div class="sensor-card">
+
+                        <div class="sensor-card-header">
+
+                            <div class="sensor-icon">
+                                📡
+                            </div>
+
+                            <div class="sensor-label" data-translate="irSensor">
+                                IR Sensor
+                            </div>
+
+                        </div>
+
+
+                        <div class="sensor-value">
+
+                            <span id="irValue">
+                                No Object
+                            </span>
+
+                        </div>
+
+
+                        <div class="sensor-status normal" id="irStatus">
+                            🟢 No Object
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2 data-translate="quickActions">
+                            Quick Actions ⚡
+                        </h2>
+
+                        <p data-translate="controlTerraPlusSystem">
+                            Control your TerraPlus system
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <button class="quick-action-card" data-target="npk" type="button">
+
+                        <span class="quick-icon">
+                            🌱
+                        </span>
+
+                        <span data-translate="manualNpk">
+                            Manual NPK
+                        </span>
+
+                    </button>
+
+
+                    <button class="quick-action-card" data-target="irrigation" type="button">
+
+                        <span class="quick-icon">
+                            💧
+                        </span>
+
+                        <span data-translate="irrigation">
+                            Irrigation
+                        </span>
+
+                    </button>
+
+
+                    <button class="quick-action-card" data-target="analytics" type="button">
+
+                        <span class="quick-icon">
+                            📊
+                        </span>
+
+                        <span data-translate="viewAnalytics">
+                            View Analytics
+                        </span>
+
+                    </button>
+
+
+                    <button class="quick-action-card" data-target="devices" type="button">
+
+                        <span class="quick-icon">
+                            🔌
+                        </span>
+
+                        <span data-translate="devices">
+                            Devices
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- FARM CONDITIONS CHART -->
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+
+                            <h2 data-translate="farmConditions">
+                                Farm Conditions 📈
+                            </h2>
+
+                            <p data-translate="temperatureHumidityMonitoring">
+                                Temperature and humidity monitoring
+                            </p>
+
+                        </div>
+
+
+                        <select id="dashboardChartRange">
+
+                            <option value="7" data-translate="last7Days">
+                                Last 7 Days
+                            </option>
+
+                            <option value="14" data-translate="last14Days">
+                                Last 14 Days
+                            </option>
+
+                            <option value="30" data-translate="last30Days">
+                                Last 30 Days
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <canvas id="farmConditionsChart"></canvas>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ANALYTICS
+            ================================================== -->
+
+            <section id="analytics" class="content-section">
+
+                <div class="page-header">
+
+                    <h1 data-translate="analyticsPageTitle">
+                        Analytics 📊
+                    </h1>
+
+                    <p data-translate="monitorFarmConditions">
+                        Monitor your farm conditions over time.
+                    </p>
+
+                </div>
+
+
+                <div class="analytics-grid">
+
+
+                    <!-- TEMPERATURE -->
+
+                    <div class="chart-card">
+
+                        <div class="chart-header">
+
+                            <div>
+
+                                <h2 data-translate="temperatureChart">
+                                    Temperature 🌡️
+                                </h2>
+
+                                <p data-translate="temperatureTrend">
+                                    Temperature trend
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-container">
+
+                            <canvas id="temperatureChart"></canvas>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HUMIDITY -->
+
+                    <div class="chart-card">
+
+                        <div class="chart-header">
+
+                            <div>
+
+                                <h2 data-translate="humidityChart">
+                                    Humidity 💧
+                                </h2>
+
+                                <p data-translate="humidityTrend">
+                                    Humidity trend
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-container">
+
+                            <canvas id="humidityChart"></canvas>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NPK -->
+
+                    <div class="chart-card">
+
+                        <div class="chart-header">
+
+                            <div>
+
+                                <h2 data-translate="npkTrends">
+                                    NPK Trends 🌱
+                                </h2>
+
+                                <p data-translate="npkDescription">
+                                    Nitrogen, phosphorus and potassium
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-container">
+
+                            <canvas id="npkChart"></canvas>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 NPK
+            ================================================== -->
+
+            <section id="npk" class="content-section">
+
+                <div class="page-header">
+
+                    <h1 data-translate="manualNpkControl">
+                        Manual NPK Control 🌱
+                    </h1>
+
+                    <p data-translate="controlThreeValves">
+                        Control the three fertilizer solenoid valves manually.
+                    </p>
+
+                </div>
+
+
+                <div class="npk-control-grid">
+
+
+                    <!-- NITROGEN -->
+
+                    <div class="npk-control-card">
+
+                        <div class="npk-control-icon">
+                            🟢
+                        </div>
+
+
+                        <h2 data-translate="nitrogen">
+                            Nitrogen
+                        </h2>
+
+
+                        <p data-translate="nFertilizerValve">
+                            N Fertilizer Valve
+                        </p>
+
+
+                        <div class="npk-reading">
+
+                            <strong id="npkNitrogenReading">
+                                180
+                            </strong>
+
+                            <span>
+                                mg/kg
+                            </span>
+
+                        </div>
+
+
+                        <div class="valve-status">
+
+                            <span class="status-dot"></span>
+
+                            <span data-translate="solenoidValve1Ready">
+                                Solenoid Valve 1 Ready
+                            </span>
+
+                        </div>
+
+
+                        <button class="control-button" data-valve="nitrogen" type="button"
+                            data-translate="activateNitrogen">
+                            💧 Activate Nitrogen
+                        </button>
+
+                    </div>
+
+
+                    <!-- PHOSPHORUS -->
+
+                    <div class="npk-control-card">
+
+                        <div class="npk-control-icon">
+                            🟠
+                        </div>
+
+
+                        <h2 data-translate="phosphorus">
+                            Phosphorus
+                        </h2>
+
+
+                        <p data-translate="pFertilizerValve">
+                            P Fertilizer Valve
+                        </p>
+
+
+                        <div class="npk-reading">
+
+                            <strong id="npkPhosphorusReading">
+                                75
+                            </strong>
+
+                            <span>
+                                mg/kg
+                            </span>
+
+                        </div>
+
+
+                        <div class="valve-status">
+
+                            <span class="status-dot"></span>
+
+                            <span data-translate="solenoidValve2Ready">
+                                Solenoid Valve 2 Ready
+                            </span>
+
+                        </div>
+
+
+                        <button class="control-button" data-valve="phosphorus" type="button"
+                            data-translate="activatePhosphorus">
+                            💧 Activate Phosphorus
+                        </button>
+
+                    </div>
+
+
+                    <!-- POTASSIUM -->
+
+                    <div class="npk-control-card">
+
+                        <div class="npk-control-icon">
+                            🔵
+                        </div>
+
+
+                        <h2 data-translate="potassium">
+                            Potassium
+                        </h2>
+
+
+                        <p data-translate="kFertilizerValve">
+                            K Fertilizer Valve
+                        </p>
+
+
+                        <div class="npk-reading">
+
+                            <strong id="npkPotassiumReading">
+                                120
+                            </strong>
+
+                            <span>
+                                mg/kg
+                            </span>
+
+                        </div>
+
+
+                        <div class="valve-status">
+
+                            <span class="status-dot"></span>
+
+                            <span data-translate="solenoidValve3Ready">
+                                Solenoid Valve 3 Ready
+                            </span>
+
+                        </div>
+
+
+                        <button class="control-button" data-valve="potassium" type="button"
+                            data-translate="activatePotassium">
+                            💧 Activate Potassium
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-icon">
+                        💡
+                    </div>
+
+
+                    <div>
+
+                        <strong data-translate="manualMode">
+                            Manual Mode
+                        </strong>
+
+                        <p data-translate="manualNpkInfo">
+                            NPK values are entered manually.
+                            The three fertilizer bottles are controlled
+                            using separate solenoid valves.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 IRRIGATION
+            ================================================== -->
+
+            <section id="irrigation" class="content-section">
+
+                <div class="page-header">
+
+                    <h1 data-translate="irrigationControl">
+                        Irrigation Control 💧
+                    </h1>
+
+                    <p data-translate="controlIrrigationMotor">
+                        Control the irrigation motor and relay.
+                    </p>
+
+                </div>
+
+
+                <div class="irrigation-card">
+
+
+                    <div class="irrigation-status">
+
+                        <div class="large-water-icon">
+                            💧
+                        </div>
+
+
+                        <div>
+
+                            <h2 data-translate="irrigationSystem">
+                                Irrigation System
+                            </h2>
+
+                            <p id="irrigationStatus" data-translate="motorOff">
+                                Motor is currently OFF
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="irrigation-controls">
+
+
+                        <button class="irrigation-on" id="irrigationOn" type="button" data-translate="turnOn">
+                            🟢 TURN ON
+                        </button>
+
+
+                        <button class="irrigation-off" id="irrigationOff" type="button" data-translate="turnOff">
+                            🔴 TURN OFF
+                        </button>
+
+                    </div>
+
+
+                    <div class="relay-information">
+
+                        <span data-translate="relayStatusLabel">
+                            Relay Status:
+                        </span>
+
+                        <strong id="relayStatus">
+                            OFF
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DEVICES
+            ================================================== -->
+
+            <section id="devices" class="content-section">
+
+                <div class="page-header">
+
+                    <h1 data-translate="devicesPageTitle">
+                        Devices 🔌
+                    </h1>
+
+                    <p data-translate="monitorConnectedHardware">
+                        Monitor connected TerraPlus hardware.
+                    </p>
+
+                </div>
+
+
+                <div class="devices-grid">
+
+
+                    <!-- ESP8266 -->
+
+                    <div class="device-card">
+
+                        <div class="device-icon">
+                            📡
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-translate="esp8266">
+                                ESP8266 12E
+                            </h3>
+
+                            <p data-translate="wifiModule">
+                                Wi-Fi module
+                            </p>
+
+                        </div>
+
+
+                        <div class="device-online" data-translate="online">
+                            🟢 Online
+                        </div>
+
+                    </div>
+
+
+                    <!-- DHT22 -->
+
+                    <div class="device-card">
+
+                        <div class="device-icon">
+                            🌡️
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-translate="dht22Sensor">
+                                DHT22 Sensor
+                            </h3>
+
+                            <p data-translate="temperatureHumidity">
+                                Temperature & humidity
+                            </p>
+
+                        </div>
+
+
+                        <div class="device-online" data-translate="online">
+                            🟢 Online
+                        </div>
+
+                    </div>
+
+
+                    <!-- IR -->
+
+                    <div class="device-card">
+
+                        <div class="device-icon">
+                            📡
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-translate="irSensor">
+                                IR Sensor
+                            </h3>
+
+                            <p data-translate="objectDetection">
+                                Object detection
+                            </p>
+
+                        </div>
+
+
+                        <div class="device-online" data-translate="online">
+                            🟢 Online
+                        </div>
+
+                    </div>
+
+
+                    <!-- NPK VALVES -->
+
+                    <div class="device-card">
+
+                        <div class="device-icon">
+                            🚰
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-translate="npkSolenoidValves">
+                                NPK Solenoid Valves
+                            </h3>
+
+                            <p data-translate="threeManualValves">
+                                3 manual fertilizer valves
+                            </p>
+
+                        </div>
+
+
+                        <div class="device-online" data-translate="ready">
+                            🟢 Ready
+                        </div>
+
+                    </div>
+
+
+                    <!-- IRRIGATION RELAY -->
+
+                    <div class="device-card">
+
+                        <div class="device-icon">
+                            💧
+                        </div>
+
+
+                        <div>
+
+                            <h3 data-translate="irrigationRelay">
+                                Irrigation Relay
+                            </h3>
+
+                            <p data-translate="relay5v2ch">
+                                5V 2-Channel Relay
+                            </p>
+
+                        </div>
+
+
+                        <div class="device-online" data-translate="online">
+                            🟢 Online
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SETTINGS
+            ================================================== -->
+
+            <section id="settings" class="content-section">
+
+                <div class="page-header">
+
+                    <h1 data-translate="settingsPageTitle">
+                        Settings ⚙️
+                    </h1>
+
+                    <p data-translate="configureDashboard">
+                        Configure your TerraPlus dashboard.
+                    </p>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <!-- LANGUAGE -->
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <h3 data-translate="language">
+                                Language
+                            </h3>
+
+                            <p data-translate="selectDashboardLanguage">
+                                Select dashboard language
+                            </p>
+
+                        </div>
+
+
+                        <div class="language-select-control">
+
+                            <span class="language-select-icon">
+                                🌐
+                            </span>
+
+                            <select id="settingsLanguage" aria-label="Select dashboard language">
+
+                                <option value="en" data-translate="english">
+                                    English
+                                </option>
+
+                                <option value="gu" data-translate="gujarati">
+                                    ગુજરાતી
+                                </option>
+
+                                <option value="hi" data-translate="hindi">
+                                    हिंदी
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NOTIFICATIONS -->
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <h3 data-translate="notifications">
+                                Notifications
+                            </h3>
+
+                            <p data-translate="receiveFarmAlerts">
+                                Receive farm alerts
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input type="checkbox" id="notificationsToggle" checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- DEMO MODE -->
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <h3 data-translate="demoModeTitle">
+                                Demo Mode
+                            </h3>
+
+                            <p data-translate="sampleSensorValues">
+                                Use sample sensor values
+                            </p>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input type="checkbox" id="demoModeToggle" checked>
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================================================
+         NOTIFICATION POPUP
+    ========================================================== -->
+
+    <div class="notification-popup" id="notificationPopup">
+
+        <div class="notification-icon">
+            🔔
+        </div>
+
+
+        <div>
+
+            <strong data-translate="terraPlusNotification">
+                TerraPlus Notification
+            </strong>
+
+            <p id="notificationMessage" data-translate="systemRunningNormally">
+                System is running normally.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         CHART.JS
+    ========================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- =========================================================
+         TERRAPLUS DASHBOARD JAVASCRIPT
+    ========================================================== -->
+
+    <script src="js/dashboard.js"></script>
+
+
+    <!-- =========================================================
+         TIME DISPLAY
+    ========================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                function updateTerraPlusTime() {
+
+                    const timeElement =
+                        document.getElementById(
+                            "currentTime"
+                        );
+
+                    if (!timeElement) {
+                        return;
+                    }
+
+                    const now =
+                        new Date();
+
+                    const options = {
+
+                        weekday: "long",
+
+                        day: "2-digit",
+
+                        month: "long",
+
+                        year: "numeric",
+
+                        hour: "2-digit",
+
+                        minute: "2-digit",
+
+                        second: "2-digit"
+
+                    };
+
+                    timeElement.textContent =
+                        now.toLocaleString(
+                            "en-IN",
+                            options
+                        );
+
+                }
+
+
+                updateTerraPlusTime();
+
+
+                setInterval(
+                    updateTerraPlusTime,
+                    1000
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
